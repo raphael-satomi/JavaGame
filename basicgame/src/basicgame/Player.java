@@ -9,32 +9,72 @@ public class Player extends Rectangle {
 	public int spd = 4;
 	public boolean right, up, down, left;
 
+	public int curAnimation = 0;
+	public int curFrames = 0, targetFrames = 15;
+	
 	public Player( int x, int y) {
 		super( x, y, 32, 32 );
 		
 	}
 	
 	public void tick() {
-		if( right ) {
+		boolean moved = false;
+		if( right && World.isFree( x+spd, y) ) {
 			x+= spd;
-		}else if( left ){
+			moved = true;
+		}else if( left && World.isFree( x-spd, y ) ){
 			x -= spd;
+			moved = true;
 		}
 		
-		if( up) {
+		if( up && World.isFree( x, y-spd ) ) {
 			y-= spd;
-		}else if( down ){
+			moved = true;
+		}else if( down && World.isFree( x, y+spd )){
 			y += spd;
+			moved = true;
 		}
 		
-		
+		if( moved == true ) {			
+			curFrames++;
+			if( curFrames == targetFrames) {
+				curFrames = 0;
+				curAnimation++;
+				if( curAnimation == Spritesheet.player_front.length ) {
+					curAnimation = 0;
+				}
+				
+			}
+		}
 		
 	}
 	
 	public void render( Graphics g) {
-		g.setColor( Color.blue );
-		g.fillRect(x, y, width, height);
+		//g.setColor( Color.blue );
+		//g.fillRect(x, y, width, height);
+		
+		g.drawImage( Spritesheet.player_front[curAnimation], x, y, 32, 32, null);
 		
 	}
 	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
