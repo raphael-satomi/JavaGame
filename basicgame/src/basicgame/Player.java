@@ -14,6 +14,7 @@ public class Player extends Rectangle {
 	public int curFrames = 0, targetFrames = 15;
 	
 	public static List<Bullet> bullets = new ArrayList<Bullet>();
+	public static List<Arrow> arrows = new ArrayList<Arrow>();
 	
 	public boolean shoot = false;
 	public int dir = 1;
@@ -57,11 +58,15 @@ public class Player extends Rectangle {
 		
 		if( shoot ) {
 			shoot = false;
-			bullets.add( new Bullet(x, y, dir) );
+			//bullets.add( new Bullet(x, y, dir) );
+			arrows.add( new Arrow(x, y, dir) );
 		}
 		
 		for( int i = 0; i < bullets.size(); i++ ) {
 			bullets.get(i).tick();
+		}
+		for( int i = 0; i < arrows.size(); i++ ) {
+			arrows.get(i).tick();
 		}
 		
 	}
@@ -74,6 +79,9 @@ public class Player extends Rectangle {
 		
 		for( int i = 0; i < bullets.size(); i++ ) {
 			bullets.get(i).render(g);
+		}
+		for( int i = 0; i < arrows.size(); i++ ) {
+			arrows.get(i).render(g);
 		}
 		
 	}

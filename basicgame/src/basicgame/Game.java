@@ -28,8 +28,8 @@ public class Game extends Canvas implements Runnable, KeyListener{
 		
 		world = new World();
 		
-		player = new Player(32, 32);
-		inimigos.add( new Inimigo(32, 32) );
+		player = new Player(96, 96);
+		inimigos.add( new Inimigo(96, 96) );
 	}
 	
 	public void tick() { //Lógica do jogo (movimentação, colisões, etc...)
@@ -49,7 +49,7 @@ public class Game extends Canvas implements Runnable, KeyListener{
 		
 		Graphics g = bs.getDrawGraphics();
 		
-		g.setColor( new Color( 0, 135, 13) );
+		g.setColor( new Color( 255, 216, 160) );
 		g.fillRect(0, 0, WIDTH * SCALE, HEIGHT * SCALE);
 		
 		player.render(g);
@@ -99,39 +99,39 @@ public class Game extends Canvas implements Runnable, KeyListener{
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
 
-		if( e.getKeyCode() == KeyEvent.VK_RIGHT ) {
+		// Mover
+		if( e.getKeyCode() == KeyEvent.VK_D ) {
 			player.right = true;
 			
-		}else if( e.getKeyCode() == KeyEvent.VK_LEFT ) {
+		}else if( e.getKeyCode() == KeyEvent.VK_A ) {
 			player.left = true;
 		}
-		
-		if ( e.getKeyCode() == KeyEvent.VK_Z ) {
-			player.shoot = true;
-		}
-		
-		if( e.getKeyCode() == KeyEvent.VK_UP ) {
+		if( e.getKeyCode() == KeyEvent.VK_W ) {
 			player.up = true;
 			
-		}else if( e.getKeyCode() == KeyEvent.VK_DOWN ) {
+		}else if( e.getKeyCode() == KeyEvent.VK_S ) {
 			player.down = true;
+		}
+		
+		// Atirar
+		if ( e.getKeyCode() == KeyEvent.VK_SPACE ) {
+			player.shoot = true;
 		}
 		
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		if( e.getKeyCode() == KeyEvent.VK_RIGHT ) {
+		if( e.getKeyCode() == KeyEvent.VK_D ) {
 			player.right = false;
 			
-		}else if( e.getKeyCode() == KeyEvent.VK_LEFT ) {
+		}else if( e.getKeyCode() == KeyEvent.VK_A ) {
 			player.left = false;
 		}
-		
-		if( e.getKeyCode() == KeyEvent.VK_UP ) {
+		if( e.getKeyCode() == KeyEvent.VK_W ) {
 			player.up = false;
 			
-		}else if( e.getKeyCode() == KeyEvent.VK_DOWN ) {
+		}else if( e.getKeyCode() == KeyEvent.VK_S ) {
 			player.down = false;
 		}
 		
