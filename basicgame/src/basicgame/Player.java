@@ -11,7 +11,8 @@ public class Player extends Rectangle {
 	public boolean right, up, down, left;
 
 	public int curAnimation = 0;
-	public int curFrames = 0, targetFrames = 15;
+	public int curFrames = 0, targetFrames = 10;
+	public int lengthAnimation = 0;
 	
 	public static List<Bullet> bullets = new ArrayList<Bullet>();
 	public static List<Arrow> arrows = new ArrayList<Arrow>();
@@ -48,9 +49,40 @@ public class Player extends Rectangle {
 			curFrames++;
 			if( curFrames == targetFrames) {
 				curFrames = 0;
-				curAnimation++;
-				if( curAnimation == Spritesheet.player_front.length ) {
+				
+				if( down == true && curAnimation >= 1) {					
 					curAnimation = 0;
+				}else if( down == true ){
+					curAnimation++;
+				}
+				
+				if( up == true && curAnimation >= 3) {					
+					curAnimation = 2;
+				}else if( up == true && (curAnimation < 2 || curAnimation > 3)  ){
+					curAnimation = 2;
+				}else if( up == true ){
+					curAnimation++;
+				}
+				
+				if( right == true && curAnimation >= 5) {					
+					curAnimation = 4;
+				}else if( right == true && (curAnimation < 4 || curAnimation > 5)  ){
+					curAnimation = 4;
+				}else if( right == true ){
+					curAnimation++;
+				}
+				
+				if( left == true && curAnimation >= 7) {					
+					curAnimation = 6;
+				}else if( left == true && (curAnimation < 6 || curAnimation > 7)  ){
+					curAnimation = 6;
+				}else if( left == true ){
+					curAnimation++;
+				}
+				
+				
+				if( curAnimation == Spritesheet.player_front.length ) {
+					//curAnimation = 0;
 				}
 				
 			}

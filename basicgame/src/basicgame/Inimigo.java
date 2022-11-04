@@ -7,8 +7,8 @@ import java.util.List;
 
 public class Inimigo extends Rectangle {
 	
-	public int spd = 4;
-	public int right = 1, up = 0, down = 0, left = 0;
+	public int spd = 1;
+	public int right = 0, up = 0, down = 0, left = 0;
 
 	public int curAnimation = 0;
 	public int curFrames = 0, targetFrames = 15;
@@ -28,6 +28,18 @@ public class Inimigo extends Rectangle {
 		
 		if( right == 1 && World.isFree( x+spd, y)) {
 			x++;
+		}else if( left == 1 && World.isFree( x-spd, y ) ){
+			x -= spd;
+			moved = true;
+			dir = -1;
+		}
+		
+		if( up == 1 && World.isFree( x, y-spd ) ) {
+			y-= spd;
+			moved = true;
+		}else if( down == 1 && World.isFree( x, y+spd )){
+			y += spd;
+			moved = true;
 		}
 		
 		if( moved ) {			
@@ -62,6 +74,7 @@ public class Inimigo extends Rectangle {
 		for( int i = 0; i < bullets.size(); i++ ) {
 			bullets.get(i).render(g);
 		}
+		
 		
 	}
 	

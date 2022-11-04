@@ -29,7 +29,8 @@ public class Game extends Canvas implements Runnable, KeyListener{
 		world = new World();
 		
 		player = new Player(96, 96);
-		inimigos.add( new Inimigo(96, 96) );
+		inimigos.add( new Inimigo(226, 408) );
+		inimigos.add( new Inimigo(408, 226) );
 	}
 	
 	public void tick() { //Lógica do jogo (movimentação, colisões, etc...)
@@ -56,11 +57,36 @@ public class Game extends Canvas implements Runnable, KeyListener{
 		
 		for( int i = 0; i < inimigos.size(); i++ ) {
 			inimigos.get(i).render(g);
+			
+			if( player.x == inimigos.get(i).x ) {
+				inimigos.get(i).right = 0;
+				inimigos.get(i).left = 0;
+			}else if( player.x - inimigos.get(i).x > 0 ){
+				inimigos.get(i).right = 1;
+				inimigos.get(i).left = 0;
+			}else {
+				inimigos.get(i).right = 0;
+				inimigos.get(i).left = 1;
+			}
+			
+			if( player.y == inimigos.get(i).y ) {
+				inimigos.get(i).up = 0;
+				inimigos.get(i).down = 0;
+			}else if( player.y - inimigos.get(i).y > 0 ){
+				inimigos.get(i).up = 0;
+				inimigos.get(i).down = 1;
+			}else {
+				inimigos.get(i).up = 1;
+				inimigos.get(i).down = 0;
+			}
 		}
 		
 		world.render(g);
 		
 		bs.show();
+		
+		
+		
 	}
 	
 	public static void main(String[] args) {
