@@ -19,7 +19,7 @@ public class Game extends Canvas implements Runnable, KeyListener{
 	
 	public Player player;
 	public static World world;
-	public List<Inimigo> inimigos = new ArrayList<Inimigo>();
+	public static List<Inimigo> inimigos = new ArrayList<Inimigo>();
 	
 	public Game() {
 		this.addKeyListener(this);
@@ -28,9 +28,11 @@ public class Game extends Canvas implements Runnable, KeyListener{
 		
 		world = new World();
 		
-		player = new Player(96, 96);
-		inimigos.add( new Inimigo(226, 408) );
-		inimigos.add( new Inimigo(408, 226) );
+		player = new Player(0, 90);
+		inimigos.add( new Inimigo(246, 408) );
+		inimigos.add( new Inimigo(428, 226) );
+		inimigos.add( new Inimigo(328, 126) );
+		inimigos.add( new Inimigo(528, 126) );
 	}
 	
 	public void tick() { //Lógica do jogo (movimentação, colisões, etc...)

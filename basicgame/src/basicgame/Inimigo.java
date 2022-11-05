@@ -12,6 +12,7 @@ public class Inimigo extends Rectangle {
 
 	public int curAnimation = 0;
 	public int curFrames = 0, targetFrames = 15;
+	public int vida = 3;
 	
 	public static List<Bullet> bullets = new ArrayList<Bullet>();
 	
@@ -21,6 +22,10 @@ public class Inimigo extends Rectangle {
 	public Inimigo( int x, int y) {
 		super( x, y, 32, 32 );
 		
+	}
+	
+	public void damage() {
+		vida--;
 	}
 	
 	public void tick() {
@@ -63,6 +68,10 @@ public class Inimigo extends Rectangle {
 			bullets.get(i).tick();
 		}
 		
+	}
+	
+	public void removeInimigo() {
+		Game.inimigos.remove(this);
 	}
 	
 	public void render( Graphics g) {

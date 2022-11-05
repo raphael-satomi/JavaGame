@@ -13,9 +13,11 @@ public class Player extends Rectangle {
 	public int curAnimation = 0;
 	public int curFrames = 0, targetFrames = 10;
 	public int lengthAnimation = 0;
+	public int newPosition = 0;
 	
 	public static List<Bullet> bullets = new ArrayList<Bullet>();
 	public static List<Arrow> arrows = new ArrayList<Arrow>();
+	public static List<Boomerang> boomerangs = new ArrayList<Boomerang>();
 	
 	public boolean shoot = false;
 	public int dir = 1;
@@ -47,6 +49,8 @@ public class Player extends Rectangle {
 		
 		if( moved == true ) {			
 			curFrames++;
+			
+			
 			if( curFrames == targetFrames) {
 				curFrames = 0;
 				
@@ -80,18 +84,14 @@ public class Player extends Rectangle {
 					curAnimation++;
 				}
 				
-				
-				if( curAnimation == Spritesheet.player_front.length ) {
-					//curAnimation = 0;
-				}
-				
 			}
 		}
 		
 		if( shoot ) {
 			shoot = false;
 			//bullets.add( new Bullet(x, y, dir) );
-			arrows.add( new Arrow(x, y, dir) );
+			//arrows.add( new Arrow(x, y, dir) );
+			boomerangs.add( new Boomerang(x, y, dir));
 		}
 		
 		for( int i = 0; i < bullets.size(); i++ ) {
@@ -99,6 +99,9 @@ public class Player extends Rectangle {
 		}
 		for( int i = 0; i < arrows.size(); i++ ) {
 			arrows.get(i).tick();
+		}
+		for( int i = 0; i < boomerangs.size(); i++ ) {
+			boomerangs.get(i).tick();
 		}
 		
 	}
@@ -114,6 +117,23 @@ public class Player extends Rectangle {
 		}
 		for( int i = 0; i < arrows.size(); i++ ) {
 			arrows.get(i).render(g);
+		}
+		for( int i = 0; i < boomerangs.size(); i++ ) {
+			boomerangs.get(i).render(g);
+		}
+		
+		for( int i = 0; i < boomerangs.size(); i++ ) {
+			Boomerang boom = boomerangs.get(i);
+			
+			for( int j = 0; j < Game.inimigos.size(); j++ ) {				
+				if( boom.intersects( Game.inimigos.get(j) ) ) {
+					Game.inimigos.get(j).damage();
+					boomerangs.get(i).removeBoomerang();
+					if( Game.inimigos.get(j).vida == 0 ) {
+						Game.inimigos.get(j).removeInimigo();
+					}
+				}
+			}
 		}
 		
 	}

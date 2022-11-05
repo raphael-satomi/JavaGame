@@ -13,6 +13,7 @@ public class Spritesheet {
 	public static BufferedImage tileWall;
 	public static BufferedImage bush;
 	public static BufferedImage arrow;
+	public static BufferedImage[] boomerang;
 	
 	public Spritesheet() {
 		
@@ -24,6 +25,7 @@ public class Spritesheet {
 		
 		player_front = new BufferedImage[8];
 		inimigo_front = new BufferedImage[2];
+		boomerang = new BufferedImage[3];
 		
 		//Down
 		player_front[0] = Spritesheet.getSprite(0, 11, 16, 16);
@@ -45,6 +47,9 @@ public class Spritesheet {
 		bush = Spritesheet.getSprite(162, 218, 16, 15);
 		
 		arrow = Spritesheet.getSprite(10, 190, 16, 5);
+		boomerang[0] = Spritesheet.getSprite(64, 189, 8, 8);
+		boomerang[1] = Spritesheet.getSprite(73, 189, 8, 8);
+		boomerang[2] = Spritesheet.getSprite(82, 189, 8, 8);
 		
 	}
 	
